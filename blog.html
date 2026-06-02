@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — ShesFundable.Ready</title>
+<meta name="description" content="Expert insights on funding readiness, business strategy, and entrepreneur success.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink: #FF0066;
+    --pink-light: #FF3385;
+    --pink-pale: #fff0f5;
+    --black: #000000;
+    --white: #FFFFFF;
+    --gray: #F7F7F7;
+    --gray-mid: #e8e8e8;
+    --text-muted: #666;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--black);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--gray-mid);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%;
+    height: 64px;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900; font-size: 1.3rem; letter-spacing: -0.02em;
+    color: var(--black);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--pink); }
+  .nav-links { display: flex; gap: 2rem; align-items: center; }
+  .nav-links a {
+    text-decoration: none; color: var(--black); font-size: 0.875rem;
+    font-weight: 500; transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--pink); }
+  .nav-cta {
+    background: var(--pink); color: var(--white) !important;
+    padding: 0.5rem 1.25rem; border-radius: 6px;
+    font-weight: 600 !important;
+  }
+  .nav-cta:hover { background: var(--pink-light) !important; }
+
+  section { padding: 80px 5%; }
+  .section-label {
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--pink); margin-bottom: 1rem;
+  }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 700; line-height: 1.15; letter-spacing: -0.02em;
+  }
+
+  /* ── BLOG HERO ── */
+  .blog-hero {
+    margin-top: 64px;
+    background: var(--black);
+    padding: 60px 5%;
+    text-align: center;
+    color: var(--white);
+  }
+  .blog-hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900; line-height: 1.1; letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+  .blog-hero p {
+    font-size: 1.05rem; color: rgba(255,255,255,0.75);
+    max-width: 600px; margin: 0 auto; line-height: 1.6;
+  }
+
+  /* ── BLOG LAYOUT ── */
+  .blog-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr; gap: 3rem; }
+  
+  /* ── FEATURED POSTS ── */
+  .blog-featured { display: flex; flex-direction: column; gap: 2.5rem; }
+  .blog-post {
+    display: grid; grid-template-columns: 280px 1fr; gap: 2rem;
+    padding-bottom: 2.5rem; border-bottom: 1px solid var(--gray-mid);
+    transition: all .25s;
+  }
+  .blog-post:last-child { border-bottom: none; }
+  .blog-post:hover { transform: translateY(-2px); }
+  
+  .blog-post-image {
+    width: 280px; height: 200px;
+    background: var(--gray); border-radius: 8px;
+    overflow: hidden; display: flex; align-items: center; justify-content: center;
+    font-size: 3rem; color: var(--pink); opacity: 0.3;
+  }
+  
+  .blog-post-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+  .blog-meta {
+    font-size: 0.8rem; color: var(--pink); font-weight: 600;
+    margin-bottom: 0.75rem; letter-spacing: 0.05em;
+  }
+  .blog-post-content p {
+    color: var(--text-muted); font-size: 0.95rem; line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+  .continue-reading {
+    font-size: 0.85rem; color: var(--pink); font-weight: 600;
+    text-decoration: none; display: inline-block;
+    text-transform: uppercase; letter-spacing: 0.05em;
+    transition: all .2s;
+  }
+  .continue-reading:hover { color: var(--pink-light); }
+
+  /* ── SIDEBAR ── */
+  .blog-sidebar {
+    display: flex; flex-direction: column; gap: 2.5rem;
+  }
+
+  /* Categories */
+  .categories {
+    background: var(--gray); border-radius: 12px; padding: 2rem;
+  }
+  .categories h4 {
+    font-size: 1rem; font-weight: 700; margin-bottom: 1.25rem;
+    text-transform: uppercase; letter-spacing: 0.08em; color: var(--black);
+  }
+  .category-list { list-style: none; }
+  .category-list li {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0.75rem 0; border-bottom: 1px solid var(--gray-mid);
+    font-size: 0.9rem;
+  }
+  .category-list li:last-child { border-bottom: none; }
+  .category-list a {
+    color: var(--black); text-decoration: none; font-weight: 500;
+    transition: color .2s;
+  }
+  .category-list a:hover { color: var(--pink); }
+  .category-count { color: var(--text-muted); font-size: 0.8rem; }
+
+  /* About Section */
+  .about-section {
+    background: var(--pink-pale); border-radius: 12px; padding: 2rem;
+    text-align: center;
+  }
+  .about-section h4 {
+    font-size: 1rem; font-weight: 700; margin-bottom: 1rem;
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .about-avatar {
+    width: 80px; height: 80px; margin: 0 auto 1rem;
+    background: var(--pink); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem; color: var(--white);
+  }
+  .about-section p {
+    color: var(--text-muted); font-size: 0.9rem; line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+  .learn-more-btn {
+    display: inline-block;
+    background: var(--black); color: var(--white);
+    padding: 0.6rem 1.5rem; border-radius: 6px;
+    font-size: 0.85rem; font-weight: 600;
+    text-decoration: none; transition: all .2s;
+  }
+  .learn-more-btn:hover { background: var(--pink); }
+
+  /* ── VIEW MORE BUTTON ── */
+  .view-more-section {
+    text-align: center; margin-top: 3rem;
+  }
+  .view-more-btn {
+    display: inline-block;
+    background: var(--black); color: var(--white);
+    padding: 1rem 2.5rem; border-radius: 8px;
+    font-size: 0.95rem; font-weight: 700;
+    text-decoration: none; text-transform: uppercase;
+    letter-spacing: 0.08em; transition: all .2s;
+  }
+  .view-more-btn:hover { background: var(--pink); transform: translateY(-2px); }
+
+  /* ── EMAIL SIGNUP ── */
+  .email-signup {
+    background: var(--pink); color: var(--white);
+    padding: 3rem 5%; text-align: center;
+  }
+  .email-signup h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem;
+  }
+  .email-signup p {
+    font-size: 1rem; margin-bottom: 1.5rem; opacity: 0.95;
+  }
+  .email-form {
+    display: flex; gap: 0.5rem; max-width: 500px; margin: 0 auto;
+    justify-content: center; flex-wrap: wrap;
+  }
+  .email-form input {
+    flex: 1; min-width: 200px;
+    padding: 0.75rem 1rem; border: none; border-radius: 6px;
+    font-size: 0.9rem;
+  }
+  .email-form button {
+    padding: 0.75rem 1.5rem; background: var(--black); color: var(--white);
+    border: none; border-radius: 6px; font-weight: 700; cursor: pointer;
+    transition: all .2s;
+  }
+  .email-form button:hover { background: rgba(0,0,0,0.8); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--black); color: rgba(255,255,255,0.65); padding: 4rem 5% 2rem;
+  }
+  .footer-container {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem;
+  }
+  .footer-brand h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; color: rgba(255,255,255,0.85); margin-bottom: 0.75rem; font-weight: 700;
+  }
+  .footer-brand p { font-size: 0.9rem; line-height: 1.6; color: rgba(255,255,255,0.6); }
+  
+  .footer-links { display: flex; flex-direction: column; gap: 0.75rem; text-align: center; }
+  .footer-links a { color: var(--pink); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color .2s; }
+  .footer-links a:hover { color: var(--pink-light); }
+  
+  .footer-contact p { font-size: 0.9rem; margin-bottom: 0.5rem; }
+  .footer-contact a { color: var(--pink); text-decoration: none; }
+  
+  .footer-disclaimer { grid-column: 1 / -1; font-size: 0.8rem; line-height: 1.6; color: rgba(255,255,255,0.5); }
+  
+  .footer-copyright { grid-column: 1 / -1; text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.85rem; }
+  .footer-copyright p { margin-bottom: 0.5rem; }
+  .footer-copyright p:last-child { color: var(--pink); font-weight: 600; }
+
+  /* ── SCROLL TO TOP ── */
+  .scroll-top {
+    position: fixed; bottom: 2rem; right: 2rem; z-index: 200;
+    width: 44px; height: 44px;
+    background: var(--pink); color: var(--white);
+    border: none; border-radius: 50%; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(255,0,102,0.4);
+    opacity: 0; transform: translateY(12px);
+    transition: opacity .3s, transform .3s, background .2s;
+    pointer-events: none;
+  }
+  .scroll-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .scroll-top:hover { background: var(--pink-light); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .blog-container { grid-template-columns: 1fr; }
+    .blog-post { grid-template-columns: 1fr; }
+    .blog-post-image { width: 100%; height: 250px; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="shesfundable-300-offer.html" class="nav-logo">Shes<span>Fundable</span>.Ready</a>
+  <div class="nav-links">
+    <a href="shesfundable-300-offer.html">Home</a>
+    <a href="shesfundable-300-offer.html#offer">What's Included</a>
+    <a href="shesfundable-300-offer.html#price">Pricing</a>
+    <a href="blog.html">Blog</a>
+    <a href="shesfundable-300-offer.html#faq">FAQ</a>
+    <a href="shesfundable-300-offer.html#get-started" class="nav-cta">Get Started Now!</a>
+  </div>
+</nav>
+
+<!-- BLOG HERO -->
+<section class="blog-hero">
+  <h1>The Latest & Greatest</h1>
+  <p>Expert insights on funding readiness, business strategy, and entrepreneur success.</p>
+</section>
+
+<!-- BLOG CONTENT -->
+<section style="padding: 60px 5%;">
+  <div class="blog-container">
+    <!-- MAIN CONTENT -->
+    <div class="blog-featured">
+      <!-- POST 1 -->
+      <article class="blog-post">
+        <div class="blog-post-image">📊</div>
+        <div class="blog-post-content">
+          <p class="blog-meta">April 15, 2026</p>
+          <h3>The 5 Funding Readiness Metrics That Matter Most</h3>
+          <p>Discover the key financial and operational metrics lenders and investors evaluate when assessing your business. Learn what benchmarks you should hit before approaching funding partners.</p>
+          <a href="#" class="continue-reading">Continue Reading →</a>
+        </div>
+      </article>
+
+      <!-- POST 2 -->
+      <article class="blog-post">
+        <div class="blog-post-image">💼</div>
+        <div class="blog-post-content">
+          <p class="blog-meta">April 8, 2026</p>
+          <h3>Building Business Credit: A Roadmap for Women Entrepreneurs</h3>
+          <p>Your personal credit score isn't enough. This guide walks you through establishing strong business credit, understanding credit bureaus, and leveraging your credit profile to access better funding terms.</p>
+          <a href="#" class="continue-reading">Continue Reading →</a>
+        </div>
+      </article>
+
+      <!-- POST 3 -->
+      <article class="blog-post">
+        <div class="blog-post-image">🎯</div>
+        <div class="blog-post-content">
+          <p class="blog-meta">April 1, 2026</p>
+          <h3>Preparing Your Financial Statements: What Funders Actually Look For</h3>
+          <p>Financial statements are your business's story told in numbers. Learn how to prepare clean, organized statements that give investors and lenders confidence in your ability to manage their capital.</p>
+          <a href="#" class="continue-reading">Continue Reading →</a>
+        </div>
+      </article>
+
+      <!-- VIEW MORE -->
+      <div class="view-more-section">
+        <a href="#" class="view-more-btn">View More Articles</a>
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside class="blog-sidebar">
+      <!-- CATEGORIES -->
+      <div class="categories">
+        <h4>Topics</h4>
+        <ul class="category-list">
+          <li>
+            <a href="#">Business Readiness</a>
+            <span class="category-count">12</span>
+          </li>
+          <li>
+            <a href="#">Funding Strategy</a>
+            <span class="category-count">18</span>
+          </li>
+          <li>
+            <a href="#">Financial Planning</a>
+            <span class="category-count">10</span>
+          </li>
+          <li>
+            <a href="#">Operations & Growth</a>
+            <span class="category-count">15</span>
+          </li>
+          <li>
+            <a href="#">Investor Relations</a>
+            <span class="category-count">8</span>
+          </li>
+          <li>
+            <a href="#">Entrepreneur Stories</a>
+            <span class="category-count">7</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- ABOUT -->
+      <div class="about-section">
+        <h4>About This Blog</h4>
+        <div class="about-avatar">👩‍💼</div>
+        <p>Funding Readiness Resources from the ShesFundable.Ready team. We share insights, tools, and strategies to help women entrepreneurs build businesses that funding respects.</p>
+        <a href="shesfundable-300-offer.html" class="learn-more-btn">Learn More</a>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- EMAIL SIGNUP -->
+<section class="email-signup">
+  <h3>Funding Readiness Tips</h3>
+  <p>Get expert insights delivered to your inbox every week.</p>
+  <form class="email-form">
+    <input type="email" placeholder="Your email" required>
+    <button type="submit">Subscribe</button>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-brand">
+      <h3>Shes<span style="color:var(--pink);">Fundable</span>.Ready</h3>
+      <p>Helping women entrepreneurs build stronger, more fundable businesses through education, readiness assessments, and strategic guidance.</p>
+    </div>
+
+    <div class="footer-links">
+      <a href="/privacy-policy">Privacy Policy</a>
+      <a href="/terms-and-conditions">Terms &amp; Conditions</a>
+      <a href="blog.html">Blog</a>
+    </div>
+
+    <div class="footer-contact">
+      <p>Email: <a href="mailto:fundablebusiness@gmail.com">fundablebusiness@gmail.com</a></p>
+      <p>Business Hours: Monday - Friday, 9:00 AM - 5:00 PM EST</p>
+    </div>
+
+    <div class="footer-disclaimer">
+      <p>Disclaimer: ShesFundable does not provide legal, tax, accounting, or financial advice. The Funding Readiness Review is an educational and informational service designed to help entrepreneurs better understand their business readiness for funding opportunities. Funding approval is determined solely by individual lenders, investors, grantors, and funding partners. No funding approval is guaranteed.</p>
+    </div>
+
+    <div class="footer-copyright">
+      <p>© 2026 Shes<span style="color:var(--pink);">Fundable</span>.Ready. All Rights Reserved.</p>
+      <p>Fund Her &amp; Change the World™</p>
+    </div>
+  </div>
+</footer>
+
+<!-- SCROLL TO TOP -->
+<button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
+  <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<script>
+  // Scroll to top
+  const scrollBtn = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => {
+    scrollBtn.classList.toggle('visible', window.scrollY > 400);
+  });
+  scrollBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+</body>
+</html>
